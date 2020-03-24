@@ -1,0 +1,31 @@
+.pagination {
+  margin-top: 2rem;
+
+  &__text {
+    font-weight: 400;
+    font-size: 18px;
+    color: #525252;
+  }
+
+  &__btn {
+    padding: 4px 8px;
+    background-color: #f4f4f4;
+    border: 1px solid #525252;
+    border-radius: 5px;
+    font-size: 16px;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &-active {
+      background-color: #525252;
+      color: #fff;
+    }
+  }
+}
+

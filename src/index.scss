@@ -13,6 +13,32 @@ code {
 }
 
 .container {
-  margin: 0 auto;
   max-width: 1170px;
+  margin: 0 auto;
+}
+
+.flex-jcsb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@import "assets/scss/resources";
+@import "assets/scss/fonts";
+
+html {
+  font-size: $xlMainFontSize;
+
+  @media screen and (max-width: $lgWidth) {
+    font-size: $lgMainFontSize;
+  }
+  @media screen and (max-width: $mdWidth) {
+    font-size: $mdMainFontSize;
+  }
+  @media screen and (max-width: $smWidth) {
+    font-size: $smMainFontSize;
+  }
+  @media screen and (max-width: $xsWidth) {
+    font-size: $xsMainFontSize;
+  }
 }
