@@ -1,17 +1,17 @@
+@import "../../../assets/scss/resources";
+
 .pagination {
   margin-top: 2rem;
 
   &__text {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 18px;
-    color: #525252;
+    color: $mainFontColor;
   }
 
   &__btn {
-    padding: 4px 8px;
-    background-color: #f4f4f4;
-    border: 1px solid #525252;
-    border-radius: 5px;
+    padding: 7px;
+    border-radius: 50%;
     font-size: 16px;
 
     &:not(:last-child) {
@@ -20,11 +20,12 @@
 
     &:hover {
       cursor: pointer;
+      background-color: $activeItemBg;
     }
 
     &-active {
-      background-color: #525252;
-      color: #fff;
+      background-color: $activeItemBg;
+      color: $mainFontColor;
     }
   }
 }

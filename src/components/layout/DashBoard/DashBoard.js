@@ -3,6 +3,7 @@ import './DashBoard.scss';
 import React, { useEffect, useState } from 'react';
 import { API_URL } from "../../../utils/helpers";
 import PaginationControlled from "../../Pagination/PaginationControlled";
+import { ItemsPerPageBlock } from "../../Pagination/ItemsPerPageBlock";
 
 export function DashBoard() {
     const [page, setPage] = useState(1);
@@ -30,27 +31,7 @@ export function DashBoard() {
     return (
         <div className='container'>
             <div className='flex-jcsb pagination'>
-                <div>
-                    <span className="pagination__text">Items per page:&emsp;</span>
-                    <span
-                        className={pagesToShow === 10 ? 'pagination__btn pagination__btn-active': 'pagination__btn'}
-                        onClick={() =>itemPerPage(10)}
-                    >
-                        10
-                    </span>
-                    <span
-                        className={pagesToShow === 25 ? 'pagination__btn pagination__btn-active': 'pagination__btn'}
-                        onClick={() =>itemPerPage(25)}
-                    >
-                        25
-                    </span>
-                    <span
-                        className={pagesToShow === 50 ? 'pagination__btn pagination__btn-active': 'pagination__btn'}
-                        onClick={() =>itemPerPage(50)}
-                    >
-                        50
-                    </span>
-                </div>
+                <ItemsPerPageBlock itemPerPage={itemPerPage} pagesToShow={pagesToShow}/>
                 <PaginationControlled setCurrntPage={pageHandler} pagesToShow={pagesToShow}/>
             </div>
             <h1>{page}</h1>
