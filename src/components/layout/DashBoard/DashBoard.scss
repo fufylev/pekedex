@@ -1,32 +1,26 @@
 @import "../../../assets/scss/resources";
 
-.pagination {
-  margin-top: 2rem;
-
-  &__text {
-    font-weight: 500;
-    font-size: 18px;
-    color: $mainFontColor;
-  }
-
-  &__btn {
-    padding: 7px;
-    border-radius: 50%;
-    font-size: 16px;
-
-    &:not(:last-child) {
-      margin-right: 1rem;
-    }
-
-    &:hover {
-      cursor: pointer;
-      background-color: $activeItemBg;
-    }
-
-    &-active {
-      background-color: $activeItemBg;
-      color: $mainFontColor;
-    }
-  }
+main {
+  margin: 2rem 0;
 }
 
+.card {
+  min-height: 300px;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selected {
+  width: 150px!important;
+  @media screen and (max-width: $smWidth) {
+    text-align: center;
+    margin-top: 1rem!important;
+  }
+  @media screen and (max-width: $xsWidth) {
+    text-align: center;
+    margin-top: 1rem!important;
+  }
+
+}
