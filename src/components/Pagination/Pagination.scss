@@ -1,0 +1,36 @@
+@import "../../assets/scss/resources";
+
+.items-per-page {
+  margin-bottom: 1rem;
+}
+
+/*
+.pagination {
+  margin-top: 2rem;
+
+  &__text {
+    font-weight: 500;
+    font-size: 18px;
+    color: $mainFontColor;
+  }
+
+  &__btn {
+    padding: 7px;
+    border-radius: 50%;
+    font-size: 16px;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $activeItemBg;
+    }
+
+    &-active {
+      background-color: $activeItemBg;
+      color: $mainFontColor;
+    }
+  }
+}*/
