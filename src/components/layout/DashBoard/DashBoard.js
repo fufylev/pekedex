@@ -1,78 +1,43 @@
 import './DashBoard.scss'
 
-import React, { useEffect, useState } from 'react'
-import { API_URL } from '../../../utils/helpers'
-import PaginationControlled from '../../Pagination/PaginationControlled'
+import React, { useEffect } from 'react'
+import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import Typography from '@material-ui/core/Typography'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select'
-import axios from 'axios'
+import PaginationControlled from '../../Pagination/PaginationControlled'
+import { inject, observer } from 'mobx-react'
+import ItemsPerPageBlock from '../../Pagination/ItemsPerPageBlock'
+import Pokemon from '../../Pokemon/Pokemon'
 
-export function DashBoard () {
-  const [page, setPage] = useState(1)
-  const [itemsToShow, setItemsToShow] = useState(10)
-  const [pokemons, setPokemons] = useState([])
+function DashBoard (props) {
+  const { pokemons } = props.Store
 
   useEffect(() => {
-    try {
-      axios.get(`${API_URL}pokemon/?offset=${page === 1 ? 0 : (page - 1) * itemsToShow}&limit=${itemsToShow}`)
-        .then(response => {
-          setPokemons(response.data.results)
-        })
-    } catch (e) {
-      console.log(e)
-    }
-  }, [page, itemsToShow])
-
-  const pageHandler = page => {
-    setPage(page)
-  }
-
-  const itemPerPageHandler = event => {
-    setItemsToShow(event.target.value)
-  }
+    props.Store.fetchItems()
+  }, [])
 
   return (
     <div className='container'>
-      <Grid container justify='space-between' alignItems='center'>
-        <Grid item>
-          <PaginationControlled setCurrentPage={pageHandler} itemsToShow={itemsToShow}/>
+      <div className='pagination-block'>
+        <Grid container justify='space-between' alignItems='center'>
+          <Grid item>
+            <PaginationControlled />
+          </Grid>
+          <Grid item>
+            <ItemsPerPageBlock/>
+          </Grid>
         </Grid>
-        <Grid item justify='center'>
-          <FormControl className='selected'>
-            <InputLabel htmlFor="age-native-simple">Items per page</InputLabel>
-            <Select
-              native
-              value={itemsToShow}
-              onChange={itemPerPageHandler}
-            >
-              <option aria-label="" value=""/>
-              <option value={10}>10</option>
-              <option value={20}>20</option>
-              <option value={50}>50</option>
-            </Select>
-          </FormControl>
-        </Grid>
+      </div>
+      <Grid container spacing={3}>
+        {pokemons && pokemons.map(pokemon =>
+          <Pokemon pokemon={pokemon} key={pokemon.name}/>
+        )}
       </Grid>
-      <main>
-        <Grid container spacing={3}>
-          {pokemons.map(pokemon =>
-            <Grid item xs={12} sm={6} md={3} key={pokemon.name}>
-              <Card className='card'>
-                <CardContent>
-                  <Typography className='' color="textSecondary" gutterBottom>
-                    {pokemon.name.toUpperCase()}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          )}
-        </Grid>
-      </main>
     </div>
   )
 }
+
+DashBoard.propTypes = {
+  Store: PropTypes.object
+}
+
+export default inject('Store')(observer(DashBoard))

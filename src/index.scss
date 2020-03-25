@@ -1,5 +1,6 @@
 @import "assets/scss/resources";
 @import "assets/scss/fonts";
+
 body {
   margin: 0;
   padding: 0;
@@ -37,8 +38,6 @@ code {
   align-items: center;
   flex-wrap: wrap;
 }
-
-
 
 html {
   font-size: $xlMainFontSize;
