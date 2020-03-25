@@ -1,5 +1,5 @@
 import { action, configure, decorate, observable } from 'mobx'
-import { getAllPokemons, fetchPokemon } from '../utils/helpers'
+import { getAllPokemons, fetchPokemon, pokemonTypes } from '../utils/helpers'
 
 configure({ enforceActions: true })
 
@@ -8,6 +8,7 @@ class Store {
     this.pokemons = []
     this.page = 1
     this.itemsToShow = 10
+    this.pokemonTypes = {}
   }
 
   setPage (page) {
@@ -22,6 +23,14 @@ class Store {
 
   setPokemons (data) {
     this.pokemons = data
+  }
+
+  setPokemonTypes () {
+    this.pokemonTypes = { ...pokemonTypes }
+  }
+
+  tickPokemonTypes (type) {
+    this.pokemonTypes = { ...this.pokemonTypes, ...type }
   }
 
   /**
@@ -58,9 +67,12 @@ decorate(Store, {
   setItemToShow: action,
   setPage: action,
   setPokemons: action,
+  setPokemonTypes: action,
+  tickPokemonTypes: action,
   pokemons: observable,
   page: observable,
-  itemsToShow: observable
+  itemsToShow: observable,
+  pokemonTypes: observable
 })
 
 export default new Store()

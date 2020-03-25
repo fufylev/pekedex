@@ -1,12 +1,18 @@
 import React from 'react'
-import Header from './components/layout/Header/Header'
+import { Route, Switch } from 'react-router-dom'
+// import Header from './components/layout/Header/Header'
 import DashBoard from './components/layout/DashBoard/DashBoard'
+// import Modal from './components/Modal/Modal'
+import { MainPage } from './components/layout/MainPage/MainPage'
 
 function App () {
   return (
     <div>
-      <Header/>
-      <DashBoard/>
+      {/* <Header/> */}
+      <Switch>
+        <Route exact path="/"><MainPage/></Route>
+        <Route path="/pokemons"><DashBoard/></Route>
+      </Switch>
     </div>
   )
 }

@@ -8,6 +8,7 @@ import { inject, observer } from 'mobx-react'
 import ItemsPerPageBlock from '../../Pagination/ItemsPerPageBlock'
 import Pokemon from '../../Pokemon/Pokemon'
 import CircularProgress from '../../Loader/Loader'
+import CheckBox from '../../Filter/CheckBox'
 
 function DashBoard (props) {
   const { pokemons } = props.Store
@@ -25,6 +26,13 @@ function DashBoard (props) {
           </Grid>
           <Grid item>
             <ItemsPerPageBlock/>
+          </Grid>
+        </Grid>
+        <Grid container justify='space-between' alignItems='center'>
+          <Grid item>
+            <CheckBox/>
+          </Grid>
+          <Grid item>
           </Grid>
         </Grid>
       </div>
