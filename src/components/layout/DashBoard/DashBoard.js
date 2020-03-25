@@ -13,7 +13,7 @@ function DashBoard (props) {
   const { pokemons } = props.Store
 
   useEffect(() => {
-    props.Store.fetchItems()
+    props.Store.fetchData()
   }, [])
 
   return (
@@ -29,7 +29,7 @@ function DashBoard (props) {
         </Grid>
       </div>
       <main>
-        {!pokemons ? <CircularProgress/> : (
+        {pokemons.length === 0 ? <CircularProgress/> : (
           <Grid container spacing={3}>
             {pokemons && pokemons.map(pokemon =>
               <Pokemon pokemon={pokemon} key={pokemon.name}/>
