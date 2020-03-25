@@ -1,18 +1,16 @@
 import './index.scss'
-import React, { Component } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
-import Header from './components/Header/Header'
-import { DashBoard } from './components/layout/DashBoard/DashBoard'
+import { Provider } from 'mobx-react'
+import Store from './store/index'
+import App from './App'
 
-class App extends Component {
-  render () {
-    return (
-      <div>
-        <Header/>
-        <DashBoard/>
-      </div>
-    )
-  }
+const stores = {
+  Store
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(
+  <Provider {...stores}>
+    <App/>
+  </Provider>,
+  document.getElementById('root'))

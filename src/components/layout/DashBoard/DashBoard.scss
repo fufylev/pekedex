@@ -1,9 +1,5 @@
 @import "../../../assets/scss/resources";
 
-main {
-  margin: 2rem 0;
-}
-
 .card {
   min-height: 300px;
   padding: 10px 15px;
@@ -12,15 +8,3 @@ main {
   align-items: center;
 }
 
-.selected {
-  width: 150px!important;
-  @media screen and (max-width: $smWidth) {
-    text-align: center;
-    margin-top: 1rem!important;
-  }
-  @media screen and (max-width: $xsWidth) {
-    text-align: center;
-    margin-top: 1rem!important;
-  }
-
-}
