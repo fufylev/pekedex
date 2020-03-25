@@ -1,0 +1,20 @@
+export const COLORS = {
+  grass: 'rgb(155, 204, 80)',
+  poison: 'rgb(185, 127, 201)',
+  fire: 'rgb(253, 125, 36)',
+  water: 'rgb(69, 146, 196)',
+  flying: 'linear-gradient(180deg, #3dc7ef 50%, #bdb9b8 50%)',
+  bug: 'rgb(114, 159, 63)',
+  fairy: 'rgb(253, 185, 233)',
+  psychic: 'rgb(243, 102, 185)',
+  normal: 'rgb(164, 172, 175)',
+  electric: 'rgb(238, 213, 53)',
+  ground: 'linear-gradient(180deg, #f7de3f 50%, #ab9842 50%)',
+  fighting: 'rgb(213, 103, 35)',
+  ice: 'rgb(81, 196, 231)',
+  rock: 'rgb(163, 140, 33)',
+  dragon: 'linear-gradient(180deg, #53a4cf 50%, #f16e57 50%)',
+  dark: 'rgb(112, 112, 112)',
+  ghost: 'rgb(123, 98, 163)',
+  steel: 'rgb(158, 183, 184)'
+}
