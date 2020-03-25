@@ -1,6 +1,5 @@
 import { action, configure, decorate, observable, runInAction } from 'mobx'
-import axios from 'axios'
-import { API_URL } from '../utils/helpers'
+import { fetchPokemons } from '../utils/helpers'
 
 configure({ enforceActions: true })
 
@@ -24,17 +23,12 @@ class Store {
   async fetchItems () {
     const page = this.page
     const itemsToShow = this.itemsToShow
-
-    try {
-      await axios.get(`${API_URL}pokemon/?offset=${page === 1 ? 0 : (page - 1) * itemsToShow}&limit=${itemsToShow}`)
-        .then(response => {
-          runInAction(() => {
-            this.pokemons = response.data.results
-          })
+    await fetchPokemons(page, itemsToShow)
+      .then(data => {
+        runInAction(() => {
+          this.pokemons = data
         })
-    } catch (e) {
-      console.log('Error - ', e)
-    }
+      })
   }
 }
 

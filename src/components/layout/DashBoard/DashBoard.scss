@@ -1,5 +1,12 @@
 @import "../../../assets/scss/resources";
 
+main {
+  min-height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .card {
   min-height: 300px;
   padding: 10px 15px;
@@ -7,4 +14,3 @@
   flex-direction: column;
   align-items: center;
 }
-
