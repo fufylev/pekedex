@@ -7,6 +7,7 @@ import PaginationControlled from '../../Pagination/PaginationControlled'
 import { inject, observer } from 'mobx-react'
 import ItemsPerPageBlock from '../../Pagination/ItemsPerPageBlock'
 import Pokemon from '../../Pokemon/Pokemon'
+import CircularProgress from '../../Loader/Loader'
 
 function DashBoard (props) {
   const { pokemons } = props.Store
@@ -27,11 +28,15 @@ function DashBoard (props) {
           </Grid>
         </Grid>
       </div>
-      <Grid container spacing={3}>
-        {pokemons && pokemons.map(pokemon =>
-          <Pokemon pokemon={pokemon} key={pokemon.name}/>
+      <main>
+        {!pokemons ? <CircularProgress/> : (
+          <Grid container spacing={3}>
+            {pokemons && pokemons.map(pokemon =>
+              <Pokemon pokemon={pokemon} key={pokemon.name}/>
+            )}
+          </Grid>
         )}
-      </Grid>
+      </main>
     </div>
   )
 }
