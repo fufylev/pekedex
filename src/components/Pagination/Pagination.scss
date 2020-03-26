@@ -5,19 +5,21 @@
 }
 
 .pagination-block {
-  margin-bottom: 2rem;
+  margin: 1rem auto;
+  text-align: center;
+  padding: 0 6px;
 }
 
 .selected {
-  width: 150px!important;
+  width: 150px !important;
 
   @media screen and (max-width: $smWidth) {
     text-align: center;
-    margin-top: 1rem!important;
+    margin-top: 1rem !important;
   }
   @media screen and (max-width: $xsWidth) {
     text-align: center;
-    margin-top: 1rem!important;
+    margin-top: 1rem !important;
   }
 
 }

@@ -37,3 +37,24 @@ export async function fetchPokemon (url) {
     }
   })
 }
+
+export const pokemonTypes = {
+  grass: false,
+  poison: false,
+  fire: false,
+  water: false,
+  flying: false,
+  bug: false,
+  fairy: false,
+  psychic: false,
+  normal: false,
+  electric: false,
+  ground: false,
+  fighting: false,
+  ice: false,
+  rock: false,
+  dragon: false,
+  dark: false,
+  ghost: false,
+  steel: false
+}
