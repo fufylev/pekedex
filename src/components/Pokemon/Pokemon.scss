@@ -24,12 +24,12 @@
   }
 
   @media screen and (max-width: $smWidth) {
-    font-size: 18px!important;
+    font-size: 18px !important;
     width: calc(100vw - 10px);
   }
 
   @media screen and (max-width: $xsWidth) {
-    font-size: 18px!important;
+    font-size: 18px !important;
     width: calc(100vw - 10px);
   }
 
@@ -53,12 +53,14 @@
   &__pokemon {
     margin: 10px 0;
     width: 100%;
+
     &-type {
       padding: 5px 10px;
       border-radius: 5px;
       color: white;
       font-weight: bold;
     }
+
     &-type:not(:last-child) {
       margin-right: 2rem;
     }
@@ -69,3 +71,25 @@
   transform: scale(1.03);
 }
 
+.bigcard {
+  &__container {
+    width: 100%;
+    padding: 10px 20px;
+  }
+  &__title {
+    margin-bottom: 2rem;
+  }
+  &__blocks {
+    width: 100%;
+    flex-wrap: wrap!important;
+  }
+  &__desc {
+    min-width: 300px;
+    max-width: 600px;
+  }
+  &__text {
+    font-weight: 400;
+    text-align: center;
+  }
+
+}

@@ -19,11 +19,11 @@ function PokemonDetails () {
   return (
     <>
       {!pokemon ? <CircularProgress/> : (
-        <div className='pokemon__details-view'>
-          <div className='flex-v'>
-            <h1>#{pokemon.id}&emsp;{pokemon.name.toUpperCase()}</h1>
+        <div className='bigcard__container flex-v'>
+          <div className='bigcard__title flex-v'>
+            <h1 className=''>#{pokemon.id}&emsp;{pokemon.name.toUpperCase()}</h1>
           </div>
-          <div className='flex-jcsb'>
+          <div className='bigcard__blocks flex-jcc'>
             <div className='pokemon__general flex-v'>
               <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} className='pokemon-avatar'/>
               <div className='flex-jcc'>
@@ -37,9 +37,11 @@ function PokemonDetails () {
                 ))}
               </div>
             </div>
-            <div className='pokemon__desc'>
-              <div className='pokemon__title'>
-                {pokemonSpecies && pokemonSpecies.flavor_text_entries.filter(flavor => flavor.language.name === 'en')[0].flavor_text}
+            <div className='bigcard__desc'>
+              <div className=''>
+                <h3 className='bigcard__text'>
+                  {pokemonSpecies && pokemonSpecies.flavor_text_entries.filter(flavor => flavor.language.name === 'en')[0].flavor_text}
+                </h3>
               </div>
               <div className='flex-jcsb'>
                 <div className='pokemon__table'>

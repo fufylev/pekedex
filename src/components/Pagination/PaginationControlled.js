@@ -27,7 +27,7 @@ function PaginationControlled (props) {
 
   return (
     <div className={classes.root}>
-      <Pagination count={numberOfPagesToPaginate} page={page} onChange={handleChange}/>
+      <Pagination count={numberOfPagesToPaginate} page={page} onChange={handleChange} style={{ backgroundColor: '#fff' }}/>
     </div>
   )
 }
