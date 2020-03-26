@@ -1,0 +1,19 @@
+.progress-bar {
+  position: relative;
+  width: 280px;
+  overflow: hidden;
+  background-color: #d0d0d0;
+  margin-bottom: 10px;
+  &-scale {
+    background-color: #ccac00;
+    height: 22px;
+  }
+  &-value {
+    position: absolute;
+    z-index: 3;
+    top: 0;
+    left: 10px;
+    color: black;
+    font-weight: 500;
+  }
+}
