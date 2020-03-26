@@ -7,15 +7,15 @@
   background-color: rgba(0, 0, 0, 0.09);
   width: 100vw;
   height: 100vh;
-  z-index: 0;
+  z-index: 999;
 
 
   .modal {
     position: relative;
     z-index: 1999;
-    margin: 50px auto;
-    width: calc(100vw - 200px);
-    height: calc(100vh - 100px);
+    margin: 70px auto;
+    width: calc(100vw - 400px);
+    height: calc(100vh - 150px);
     background-color: #fff;
     display: flex;
     align-items: center;

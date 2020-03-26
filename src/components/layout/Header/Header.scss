@@ -1,6 +1,6 @@
 header {
-  min-height: 50px;
-  background-color: gray;
+  min-height: 70px;
+
   background:
           radial-gradient(black 15%, transparent 16%) 0 0,
           radial-gradient(black 15%, transparent 16%) 8px 8px,
@@ -11,6 +11,9 @@ header {
 }
 
 .header {
+  display: flex!important;
+  align-items: center!important;
+  padding-top: 0.7rem;
   &-text {
     margin: 0 auto;
     color: #fff;

@@ -32,6 +32,7 @@ function DashBoard (props) {
         </div>
       </div>
       <main>
+
         <div className='container'>
           {pokemonsFiltered.length === 0
             ? <CircularProgress/> : (

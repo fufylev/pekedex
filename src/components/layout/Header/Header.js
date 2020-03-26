@@ -5,13 +5,13 @@ import AppsIcon from '@material-ui/icons/Apps'
 import { Link } from 'react-router-dom'
 export default function Header () {
   return (
-    <header className=''>
-      <div className='container flex-jcc'>
-        <Link to='/'>
+    <header>
+      <div className='container header'>
+        <Link to='/' style={{ margin: 0, padding: 0 }}>
           <AppsIcon fontSize='large' className='header-icon'/>
         </Link>
         <h2 className='header-text'>Pokedex UI</h2>
-        <Link to='/auth'>
+        <Link to='/auth' style={{ margin: 0, padding: 0 }}>
           <AccountCircleIcon fontSize='large' className='header-icon'/>
         </Link>
       </div>
