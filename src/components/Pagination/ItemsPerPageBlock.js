@@ -19,9 +19,9 @@ function ItemsPerPageBlock (props) {
         onChange={(event => props.Store.setItemToShow(event.target.value))}
       >
         <option aria-label="" value=""/>
-        <option value={10}>10</option>
-        <option value={20}>20</option>
-        <option value={50}>50</option>
+        <option value={9}>9</option>
+        <option value={21}>21</option>
+        <option value={48}>48</option>
       </Select>
     </FormControl>
   )

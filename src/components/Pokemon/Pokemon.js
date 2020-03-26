@@ -9,15 +9,16 @@ import PropTypes from 'prop-types'
 import { Link, Route, Switch } from 'react-router-dom'
 import { COLORS } from '../../utils/COLORS'
 import Modal from '../Modal/Modal'
+import { PokemonDetails } from './PokemonDetails'
 
 function Pokemon (props) {
   const { pokemon } = props
 
   return (
-    <Grid item xs={12} sm={6} md={3}>
+    <Grid item xs={12} sm={6} md={4} >
       <Link to={`/pokemons/${pokemon.id}-${pokemon.name}`} >
         <Card className='pokemon-card'>
-          <CardContent>
+          <CardContent style={{ width: '100%', padding: '0!important' }}>
             <Typography className='flex-jcc' color="textSecondary" >
               {pokemon.id} - {pokemon.name.toUpperCase()}
             </Typography>
@@ -46,7 +47,7 @@ function Pokemon (props) {
         </Card>
       </Link>
       <Switch>
-        <Route path="/pokemons/:id"><Modal/></Route>
+        <Route path="/pokemons/:id"><Modal><PokemonDetails/></Modal></Route>
       </Switch>
 
     </Grid>

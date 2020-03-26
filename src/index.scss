@@ -30,10 +30,10 @@ a {
   margin: 0 auto;
   padding: 1rem;
   @media screen and (max-width: $smWidth) {
-    padding: 8px;
+    padding: 8px 1px;
   }
   @media screen and (max-width: $xsWidth) {
-    padding: 5px;
+    padding: 5px 1px;
   }
 }
 
@@ -45,9 +45,9 @@ a {
 }
 
 .flex-jcc {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex!important;
+  justify-content: center!important;
+  align-items: center!important;
 }
 .flex-v {
   display: flex;

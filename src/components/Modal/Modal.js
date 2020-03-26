@@ -40,8 +40,8 @@ function Modal (props) {
         <div className="overlay" onClick={onClose}>
           <div className="modal">
             {children}
+            <CancelTwoToneIcon fontSize='large' className='modal-close' onClick={onCloseBtn}/>
           </div>
-          <CancelTwoToneIcon fontSize='large' className='modal-close' onClick={onCloseBtn}/>
         </div>
       </>
 
