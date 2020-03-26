@@ -26,14 +26,14 @@ a {
 }
 
 .container {
-  max-width: 1250px;
+  max-width: 1030px;
   margin: 0 auto;
-  padding: 1rem;
+  //padding: 1rem;
   @media screen and (max-width: $smWidth) {
-    padding: 8px 1px;
+    //padding: 8px 1px;
   }
   @media screen and (max-width: $xsWidth) {
-    padding: 5px 1px;
+    //padding: 5px 1px;
   }
 }
 

@@ -15,4 +15,11 @@ header {
     margin: 0 auto;
     color: #fff;
   }
+  &-icon {
+    color: white;
+    transition: transform 0.6s ease-in-out;
+  }
+  &-icon:hover {
+    transform: scale(1.2);
+  }
 }

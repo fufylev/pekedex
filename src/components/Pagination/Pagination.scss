@@ -11,15 +11,39 @@
 }
 
 .selected {
-  width: 150px !important;
+  width: 140px !important;
 
   @media screen and (max-width: $smWidth) {
-    text-align: center;
     margin-top: 1rem !important;
   }
   @media screen and (max-width: $xsWidth) {
-    text-align: center;
     margin-top: 1rem !important;
   }
 
+}
+
+.tools {
+  margin: 0 auto;
+  padding: 0 10px;
+  &__pagination {
+    width: 100%;
+    margin: 0.5rem 0;
+    align-items: flex-end!important;
+    @media screen and (max-width: $smWidth) {
+      flex-wrap: wrap;
+      justify-content: center;
+      //margin-top: 1rem !important;
+    }
+    @media screen and (max-width: $xsWidth) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+}
+
+.search {
+  margin-top: 1rem;
+  min-width: 200px;
+  margin-bottom: 1rem;
 }
