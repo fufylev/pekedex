@@ -1,31 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import { Button, IconButton, Input, InputLabel, InputAdornment, FormControl, FormHelperText } from '@material-ui/core/'
-import { Visibility, VisibilityOff } from '@material-ui/icons/'
-import clsx from 'clsx'
+import { Button } from '@material-ui/core/'
 import { Link, useHistory } from 'react-router-dom'
+import Validator from '../../../utils/Validator'
+import Alert from '@material-ui/lab/Alert'
+import CustomInput from './CustomInput'
+import PasswordInput from './PasswordInput'
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-      width: '35ch'
-    }
-  },
-  textField: {
-    width: '35ch',
-    marginBottom: '2rem'
-  }
+  root: { '& > *': { margin: theme.spacing(1), width: '35ch' } }
 }))
 
 function Register (props) {
   const classes = useStyles()
   const history = useHistory()
 
-  const { isRegistered } = props.User
+  const { isRegistered, error } = props.User
 
   useEffect(() => {
     if (isRegistered) {
@@ -34,23 +26,50 @@ function Register (props) {
     }
   }, [isRegistered])
 
-  const [email, setEmail] = useState('')
-  const [mobile, setMobile] = useState('')
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
+  const [values, setValues] = useState({
+    email: '',
+    mobile: '',
+    name: '',
+    password: '',
+    showPassword: false,
+    emailError: '',
+    passwordError: ''
+  })
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    props.User.regUser(email, password, name, mobile)
+  const handleChange = prop => event => {
+    setValues({ ...values, [prop]: event.target.value })
   }
 
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
+    setValues({ ...values, showPassword: !values.showPassword })
   }
 
   const handleMouseDownPassword = event => {
     event.preventDefault()
+  }
+
+  const validateForm = () => {
+    const emailValidate = new Validator()
+    emailValidate.validateForm({ key: 'email', value: values.email })
+
+    const passwordValidate = new Validator()
+    passwordValidate.validateForm({ key: 'password', value: values.password })
+
+    setValues({
+      ...values,
+      emailError: values.email === '' ? 'Email is required' : emailValidate.error,
+      passwordError: values.password === '' ? 'Password is required' : passwordValidate.error
+    })
+
+    return emailValidate.isValid && passwordValidate.isValid
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const formIsValid = validateForm()
+    if (formIsValid) {
+      props.User.registerUser({ ...values })
+    }
   }
 
   return (
@@ -58,74 +77,31 @@ function Register (props) {
       <div className='flex-jcc fw'>
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <div className='mb2r flex-jcc'>
-            <h2 className=''>
-              Register
-            </h2>
+            <h1 className=''>Register</h1>
           </div>
-          <div className={classes.margin}>
-            <FormControl>
-              <TextField
-                label="Name"
-                className={clsx(classes.margin, classes.textField)}
-                name='name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                maxLength={50}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                label="Mobile"
-                className={clsx(classes.margin, classes.textField)}
-                name='mobile'
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-                maxLength={50}
-              />
-            </FormControl>
-            <FormControl>
-              <TextField
-                label="Email"
-                type='email'
-                className={clsx(classes.margin, classes.textField)}
-                name='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                maxLength={100}
-              />
-            </FormControl>
-            <FormControl className={clsx(classes.margin, classes.textField)}>
-              <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
-              <Input
-                id="standard-adornment-password"
-                type={showPassword ? 'text' : 'password'}
-                name='password'
-                value={password}
-                required
-                onChange={(e) => setPassword(e.target.value)}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                    >
-                      {showPassword ? <Visibility/> : <VisibilityOff/>}
-                    </IconButton>
-                  </InputAdornment>
-                }
-              />
-              <FormHelperText id="my-helper-text">Your password will be secure saved</FormHelperText>
-            </FormControl>
+          <div >
+            <CustomInput handleChange={handleChange} value={values.name} name='name' />
+            <CustomInput handleChange={handleChange} value={values.mobile} name='mobile'/>
+            <CustomInput handleChange={handleChange} value={values.email} name='email' error={values.emailError}/>
+            {values.emailError && <Alert severity="error" className='form-error '>{values.emailError}</Alert>}
+            <PasswordInput
+              value={values.password}
+              onChange={handleChange}
+              error={values.passwordError !== ''}
+              showPassword={values.showPassword}
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+            />
+            {values.passwordError && <Alert severity="error" className='form-error '>{values.passwordError}</Alert>}
           </div>
           <div className='flex-jcc'>
-            <Button type='submit' variant="contained" color="primary" className='mb2r'>
-              Sign Up
-            </Button>
+            {error.length > 0 && <Alert severity="error" className='form-error '>{error}</Alert>}
+          </div>
+          <div className='flex-v'>
+            <Button type='submit' variant="contained" color="primary" className='mb2r'>Sign Up</Button>
           </div>
           <div className='flex-jcc mb2r'>
-            <span>Already have an account?</span>&ensp;<Link to='/auth'>Sign In</Link>
+            <span>Already have an account?</span>&ensp;<Link to='/auth'><strong>Sign In</strong></Link>
           </div>
         </form>
       </div>

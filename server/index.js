@@ -53,19 +53,17 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/auth', async (req, res) => {
-  const { username, password } = req.body
-  const user = await User.findOne({ email: username })
+  const { email, password } = req.body
+  const user = await User.findOne({ email: email })
   if (!user) {
     return res.json({
-      result: 'failure',
-      message: 'This user doesn\'t exist'
+      result: 'This user doesn\'t exist'
     })
   }
   const isPasswordValid = await user.comparePassword(password)
   if (!isPasswordValid) {
     return res.json({
-      result: 'failure',
-      message: 'Incorrect password'
+      result: 'Incorrect password'
     })
   }
   const identity = {
@@ -76,8 +74,8 @@ app.post('/auth', async (req, res) => {
   res.json({
     result: 'success',
     token,
-    firstName: user.firstName,
-    lastName: user.lastName
+    email: user.email,
+    name: user.name
   })
 })
 

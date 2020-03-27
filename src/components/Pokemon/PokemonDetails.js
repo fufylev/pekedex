@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
-import { API_URL } from '../../utils/helpers'
+import { API_URL } from '../../utils/API'
 import CircularProgress from '../Loader/Loader'
 import { COLORS } from '../../utils/COLORS'
 import ProgressBar from '../ProgressBar/ProgressBar'
