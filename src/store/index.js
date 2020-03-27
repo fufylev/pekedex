@@ -1,5 +1,6 @@
 import { action, computed, configure, decorate, observable } from 'mobx'
-import { fetchPokemon, getAllPokemons, pokemonTypes } from '../utils/helpers'
+import { pokemonTypes } from '../utils/helpers'
+import { fetchPokemon, getAllPokemons } from '../utils/API'
 
 configure({ enforceActions: 'observed' })
 

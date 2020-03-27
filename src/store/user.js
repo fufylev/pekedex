@@ -1,5 +1,5 @@
 import { action, configure, decorate, observable } from 'mobx'
-import { register } from '../utils/API'
+import { auth, register } from '../utils/API'
 
 configure({ enforceActions: 'observed' })
 
@@ -8,6 +8,13 @@ class User {
     this.isLoggedIn = false
     this.isRegistered = false
     this.error = ''
+    this.token = ''
+    this.name = ''
+    this.email = ''
+  }
+
+  setLoggedIn () {
+    this.isLoggedIn = true
   }
 
   setIsRegistered () {
@@ -25,7 +32,13 @@ class User {
     console.log(error)
   }
 
-  regUser (email, password, name, mobile) {
+  setUser ({ token, name, email }) {
+    this.token = token
+    this.name = name
+    this.email = email
+  }
+
+  registerUser ({ email, password, name, mobile }) {
     register(email, password, name, mobile).then(response => {
       console.log(response)
       if (response.data.result === 'success') {
@@ -36,14 +49,32 @@ class User {
     })
       .catch(error => this.setError(error))
   }
+
+  Authenticate ({ email, password }) {
+    auth(email, password).then(response => {
+      console.log(response)
+      if (response.data.result === 'success') {
+        this.setLoggedIn()
+        this.setUser(response.data)
+      } else {
+        this.setError(response.data.result)
+      }
+    })
+      .catch(error => this.setError(error))
+  }
 }
 
 decorate(User, {
   setIsRegistered: action,
+  setLoggedIn: action,
+  setUser: action,
   setError: action,
   clearStore: action,
   isLoggedIn: observable,
   isRegistered: observable,
+  token: observable,
+  name: observable,
+  email: observable,
   error: observable
 })
 
