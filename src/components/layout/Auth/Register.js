@@ -1,18 +1,12 @@
-import './Auth.scss'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
-import Button from '@material-ui/core/Button'
+import { Button, IconButton, Input, InputLabel, InputAdornment, FormControl, FormHelperText } from '@material-ui/core/'
 import { Visibility, VisibilityOff } from '@material-ui/icons/'
 import clsx from 'clsx'
-import IconButton from '@material-ui/core/IconButton'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import FormControl from '@material-ui/core/FormControl'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -27,20 +21,28 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function Auth (props) {
+function Register (props) {
   const classes = useStyles()
+  const history = useHistory()
+
+  const { isRegistered } = props.User
+
+  useEffect(() => {
+    if (isRegistered) {
+      history.push('/auth')
+      props.User.clearStore()
+    }
+  }, [isRegistered])
+
   const [email, setEmail] = useState('')
+  const [mobile, setMobile] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
 
-  const onChangeHandler = (event) => {
-    const name = event.target.name
-    name === 'email' ? setEmail(event.target.value) : setPassword(event.target.value)
-  }
-
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log(email, password)
+    props.User.regUser(email, password, name, mobile)
   }
 
   const handleClickShowPassword = () => {
@@ -57,20 +59,42 @@ function Auth (props) {
         <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
           <div className='mb2r flex-jcc'>
             <h2 className=''>
-              Login
+              Register
             </h2>
           </div>
           <div className={classes.margin}>
-            <TextField
-              label="Email"
-              id="standard-start-adornment"
-              className={clsx(classes.margin, classes.textField)}
-              name='email'
-              value={email}
-              onChange={onChangeHandler}
-              required
-              maxLength={56}
-            />
+            <FormControl>
+              <TextField
+                label="Name"
+                className={clsx(classes.margin, classes.textField)}
+                name='name'
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                maxLength={50}
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                label="Mobile"
+                className={clsx(classes.margin, classes.textField)}
+                name='mobile'
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
+                maxLength={50}
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                label="Email"
+                type='email'
+                className={clsx(classes.margin, classes.textField)}
+                name='email'
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                maxLength={100}
+              />
+            </FormControl>
             <FormControl className={clsx(classes.margin, classes.textField)}>
               <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
               <Input
@@ -78,7 +102,8 @@ function Auth (props) {
                 type={showPassword ? 'text' : 'password'}
                 name='password'
                 value={password}
-                onChange={onChangeHandler}
+                required
+                onChange={(e) => setPassword(e.target.value)}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -91,15 +116,16 @@ function Auth (props) {
                   </InputAdornment>
                 }
               />
+              <FormHelperText id="my-helper-text">Your password will be secure saved</FormHelperText>
             </FormControl>
           </div>
-          <div className='flex-jcc mb2r'>
+          <div className='flex-jcc'>
             <Button type='submit' variant="contained" color="primary" className='mb2r'>
-              Sign In
+              Sign Up
             </Button>
           </div>
           <div className='flex-jcc mb2r'>
-            <span>Do not have an account?</span>&ensp;<Link to='/register'>Sign Up</Link>
+            <span>Already have an account?</span>&ensp;<Link to='/auth'>Sign In</Link>
           </div>
         </form>
       </div>
@@ -107,8 +133,8 @@ function Auth (props) {
   )
 }
 
-Auth.propTypes = {
+Register.propTypes = {
   User: PropTypes.object
 }
 
-export default inject('User')(observer(Auth))
+export default inject('User')(observer(Register))

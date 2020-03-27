@@ -55,6 +55,18 @@ a {
   flex-direction: column;
   align-items: center;
 }
+
+.mb1r {
+  margin-bottom: 1rem!important;
+}
+.mb2r {
+  margin-bottom: 2rem!important;
+}
+.fw {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
 html {
   font-size: $xlMainFontSize;
   box-sizing: border-box;

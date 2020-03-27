@@ -1,0 +1,15 @@
+.form-element {
+  //min-width: 300px;
+  &__password {
+    position: relative;
+    z-index: 1;
+  }
+}
+.input-field {
+  //width: 100%;
+  //min-width: 250px!important;
+  position: relative;
+  z-index: 1;
+  &__password {
+  }
+}
