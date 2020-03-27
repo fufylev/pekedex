@@ -4,7 +4,6 @@ import React, { useEffect } from 'react'
 import ReactDom from 'react-dom'
 import PropTypes from 'prop-types'
 import { useHistory } from 'react-router-dom'
-// import CancelTwoToneIcon from '@material-ui/icons/CancelTwoTone'
 import CancelIcon from '@material-ui/icons/Cancel'
 
 const modalRoot = document.getElementById('modal')

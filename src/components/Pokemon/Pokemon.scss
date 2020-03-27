@@ -74,7 +74,7 @@
 .bigcard {
   &__container {
     width: 100%;
-    padding: 10px 20px;
+    padding: 10px 40px;
   }
   &__title {
     margin-bottom: 2rem;
@@ -90,6 +90,9 @@
   &__text {
     font-weight: 400;
     text-align: center;
+  }
+  &__avatar {
+    min-width: 300px;
   }
 
 }

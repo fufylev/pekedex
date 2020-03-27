@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { API_URL } from '../../utils/helpers'
 import CircularProgress from '../Loader/Loader'
 import { COLORS } from '../../utils/COLORS'
 import ProgressBar from '../ProgressBar/ProgressBar'
+import Button from '@material-ui/core/Button'
 
 function PokemonDetails () {
+  const history = useHistory()
   const [pokemon, setPokemon] = useState()
   const [pokemonSpecies, setPokemonSpecies] = useState()
   const { id } = useParams()
@@ -16,20 +18,24 @@ function PokemonDetails () {
     axios.get(`${API_URL}pokemon-species/${id.split('-')[0]}`).then(response => setPokemonSpecies(response.data))
   }, [])
 
+  const handleClose = () => {
+    history.goBack()
+  }
+
   return (
     <>
       {!pokemon ? <CircularProgress/> : (
         <div className='bigcard__container flex-v'>
-          <div className='bigcard__title flex-v'>
+          <div className='bigcard__title'>
             <h1 className=''>#{pokemon.id}&emsp;{pokemon.name.toUpperCase()}</h1>
           </div>
           <div className='bigcard__blocks flex-jcc'>
-            <div className='pokemon__general flex-v'>
-              <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} className='pokemon-avatar'/>
+            <div className='pokemon__general'>
+              <img src={pokemon.sprites.front_default} alt={`${pokemon.name}`} className='bigcard__avatar'/>
               <div className='flex-jcc'>
                 {pokemon.types.map((type, idx) => (
                   <div
-                    className='pokemon-type'
+                    className='smallcard__pokemon-type'
                     style={{ background: COLORS[type.type.name] }}
                     key={idx}>
                     {type.type.name}
@@ -46,9 +52,11 @@ function PokemonDetails () {
               <div className='flex-jcsb'>
                 <div className='pokemon__table'>
                   <p><strong>Gender: </strong>{pokemon.sprites.back_female === null ? 'Male' : 'Female'}</p>
-                  <p><strong>Weight: </strong>{pokemon.weight / 10 } kg</p>
+                  <p><strong>Weight: </strong>{pokemon.weight / 10} kg</p>
                   <p><strong>Height: </strong>{pokemon.height * 10} m</p>
-                  <p><strong>Abilities: </strong>{pokemon.abilities[0].ability.name} & {pokemon.abilities[1].ability.name}</p>
+                  {pokemonSpecies && <p><strong>Shape: </strong>{pokemonSpecies.shape.name}</p>}
+                  {pokemon.abilities && <p><strong>Abilities: </strong>{pokemon.abilities.map(({ ability }, idx) => <span
+                    key={idx}>{ability.name} &ensp;</span>)}</p>}
                 </div>
                 <div>
                   <div className='flex-v'>
@@ -62,6 +70,7 @@ function PokemonDetails () {
               </div>
             </div>
           </div>
+          <Button style={{ marginTop: '1rem' }} variant="contained" onClick={() => handleClose()}>Close</Button>
         </div>
       )}
     </>

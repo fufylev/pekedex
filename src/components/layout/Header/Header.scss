@@ -1,6 +1,7 @@
+@import "../../../assets/scss/resources";
+
 header {
   min-height: 70px;
-
   background:
           radial-gradient(black 15%, transparent 16%) 0 0,
           radial-gradient(black 15%, transparent 16%) 8px 8px,
@@ -8,12 +9,24 @@ header {
           radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
   background-color:#282828;
   background-size:16px 16px;
+  @media screen and (max-width: $smWidth) {
+    min-height: 50px;
+  }
+  @media screen and (max-width: $xsWidth) {
+    min-height: 50px;
+  }
 }
 
 .header {
   display: flex!important;
   align-items: center!important;
-  padding-top: 0.7rem;
+  padding: 0.7rem 0 0 0;
+  @media screen and (max-width: $smWidth) {
+    padding: 0.7rem 1rem 0 1rem;
+  }
+  @media screen and (max-width: $xsWidth) {
+    padding: 0.7rem 1rem 0 1rem;
+  }
   &-text {
     margin: 0 auto;
     color: #fff;
