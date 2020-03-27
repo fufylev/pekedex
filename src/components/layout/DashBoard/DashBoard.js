@@ -44,7 +44,7 @@ function DashBoard (props) {
             )}
         </div>
       </main>
-
+      {/* From here activate a Modal Router */}
       <Switch>
         <Route path="/pokemons/:id"><Modal><PokemonDetails/></Modal></Route>
       </Switch>

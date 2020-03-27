@@ -17,24 +17,22 @@
     width: calc(100vw - 400px);
     height: calc(100vh - 150px);
     background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 6px 0px, rgba(0, 0, 0, 0.1) 0px 2px 12px 0px;
     overflow: auto;
-
     @media screen and (max-width: $mdWidth) {
       width: calc(100vw - 30px);
-      height: calc(100vh - 50px);
+      height: calc(100vh - 150px);
     }
     @media screen and (max-width: $smWidth) {
-      width: calc(100vw - 10px);
-      height: calc(100vh - 50px);
+      width: calc(100vw - 40px);
+      max-height: 500px;
+      //height: calc(100vh - 50px);
     }
     @media screen and (max-width: $xsWidth) {
-      width: calc(100vw - 10px);
-      height: calc(100vh - 50px);
+      width: calc(100vw - 8px);
+      //height: calc(100vh - 150px);
+      max-height: 500px;
     }
   }
 }
