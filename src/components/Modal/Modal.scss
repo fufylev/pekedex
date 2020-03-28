@@ -4,10 +4,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.09);
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
-  z-index: 999;
+  z-index: 1500;
 
 
   .modal {
@@ -26,13 +26,11 @@
     }
     @media screen and (max-width: $smWidth) {
       width: calc(100vw - 40px);
-      max-height: 500px;
-      //height: calc(100vh - 50px);
+      max-height: 530px;
     }
     @media screen and (max-width: $xsWidth) {
       width: calc(100vw - 8px);
-      //height: calc(100vh - 150px);
-      max-height: 500px;
+      max-height: 530px;
     }
   }
 }

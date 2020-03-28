@@ -4,12 +4,10 @@ import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
 function MainPage (props) {
-  const { isLoggedIn } = props.User
-
   return (
     <div>
       {/* I left this page for further dev. Here can be Welcome page */}
-      {isLoggedIn ? <Redirect to='/pokemons'/> : <Redirect to='/auth'/>}
+      {<Redirect to='/pokemons'/>}
     </div>
   )
 }

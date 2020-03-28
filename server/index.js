@@ -37,10 +37,10 @@ app.post('/register', async (req, res) => {
   const checkMail = await User.findOne({
     email: req.body.email
   })
-  const checkMobile = await User.findOne({
+  /* const checkMobile = await User.findOne({
     mobile: req.body.mobile
-  })
-  if (!checkMail || !checkMobile) {
+  }) */
+  if (!checkMail) {
     const user = new User(req.body)
     await user.save()
     return res.json({

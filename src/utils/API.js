@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const API_URL = 'https://pokeapi.co/api/v2/'
-
+// eslint-disable-next-line no-unused-vars
+export const facebookID = '210062593585689'
 /**
  *
  * @param email

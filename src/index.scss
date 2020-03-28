@@ -56,6 +56,12 @@ a {
   align-items: center;
 }
 
+.flex-l {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .mb1r {
   margin-bottom: 1rem!important;
 }

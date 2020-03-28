@@ -1,6 +1,7 @@
 module.exports = {
   env: {
-    es6: true
+    es6: true,
+    "browser": true
   },
   extends: [
     'plugin:react/recommended',
@@ -8,7 +9,9 @@ module.exports = {
   ],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly'
+    SharedArrayBuffer: 'readonly',
+    "localStorage": true,
+    "fetch": true
   },
   parserOptions: {
     ecmaFeatures: {

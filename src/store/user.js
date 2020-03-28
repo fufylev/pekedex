@@ -5,11 +5,11 @@ configure({ enforceActions: 'observed' })
 
 class User {
   constructor () {
-    this.isLoggedIn = false
+    this.isLoggedIn = localStorage.getItem('token')
     this.isRegistered = false
     this.error = ''
     this.token = ''
-    this.name = ''
+    this.name = localStorage.getItem('name')
     this.email = ''
   }
 
@@ -19,6 +19,15 @@ class User {
 
   setIsRegistered () {
     this.isRegistered = true
+  }
+
+  logout () {
+    this.isLoggedIn = false
+    this.token = ''
+    this.name = ''
+    this.email = ''
+    window.localStorage.removeItem('token')
+    localStorage.removeItem('name')
   }
 
   clearStore () {
@@ -36,6 +45,8 @@ class User {
     this.token = token
     this.name = name
     this.email = email
+    localStorage.setItem('token', `Bearer ${this.token}`)
+    localStorage.setItem('name', this.name)
   }
 
   registerUser ({ email, password, name, mobile }) {
@@ -69,6 +80,7 @@ decorate(User, {
   setLoggedIn: action,
   setUser: action,
   setError: action,
+  logout: action,
   clearStore: action,
   isLoggedIn: observable,
   isRegistered: observable,
