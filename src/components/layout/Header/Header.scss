@@ -10,22 +10,20 @@ header {
   background-color:#282828;
   background-size:16px 16px;
   @media screen and (max-width: $smWidth) {
-    min-height: 50px;
+    min-height: 60px;
   }
   @media screen and (max-width: $xsWidth) {
-    min-height: 50px;
+    min-height: 60px;
   }
 }
 
 .header {
-  display: flex!important;
-  align-items: center!important;
-  padding: 0.7rem 0 0 0;
+  padding: 0.7rem 1rem 0 1rem;
   @media screen and (max-width: $smWidth) {
-    padding: 0.7rem 1rem 0 1rem;
+    //padding: 0.7rem 1rem 0 1rem;
   }
   @media screen and (max-width: $xsWidth) {
-    padding: 0.7rem 1rem 0 1rem;
+    //padding: 0.7rem 1rem 0 1rem;
   }
   &-text {
     margin: 0 auto;
@@ -37,5 +35,21 @@ header {
   }
   &-icon:hover {
     transform: scale(1.2);
+  }
+  &__brand {
+    margin-left: 1rem;
+    font-size: 26px;
+    font-weight: 600;
+    color: white;
+  }
+  &__menu {
+
+  }
+  &__link {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    margin-left: 2rem;
   }
 }

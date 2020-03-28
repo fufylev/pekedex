@@ -82,7 +82,7 @@ function Register (props) {
           <div >
             <CustomInput handleChange={handleChange} value={values.name} name='name' />
             <CustomInput handleChange={handleChange} value={values.mobile} name='mobile'/>
-            <CustomInput handleChange={handleChange} value={values.email} name='email' error={values.emailError}/>
+            <CustomInput handleChange={handleChange} value={values.email} name='email' error={values.emailError !== ''}/>
             {values.emailError && <Alert severity="error" className='form-error '>{values.emailError}</Alert>}
             <PasswordInput
               value={values.password}

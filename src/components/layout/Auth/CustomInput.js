@@ -36,7 +36,7 @@ CustomInput.propTypes = {
   value: PropTypes.string,
   name: PropTypes.string,
   length: PropTypes.string,
-  error: PropTypes.string
+  error: PropTypes.bool
 }
 
 export default CustomInput

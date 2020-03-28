@@ -5,12 +5,13 @@ configure({ enforceActions: 'observed' })
 
 class User {
   constructor () {
-    this.isLoggedIn = false
+    this.isLoggedIn = localStorage.getItem('token')
     this.isRegistered = false
     this.error = ''
-    this.token = ''
-    this.name = ''
+    this.token = localStorage.getItem('token')
+    this.name = localStorage.getItem('name')
     this.email = ''
+    this.avatar = localStorage.getItem('avatar')
   }
 
   setLoggedIn () {
@@ -19,6 +20,17 @@ class User {
 
   setIsRegistered () {
     this.isRegistered = true
+  }
+
+  logout () {
+    this.isLoggedIn = false
+    this.token = ''
+    this.name = ''
+    this.email = ''
+    this.avatar = ''
+    localStorage.removeItem('token')
+    localStorage.removeItem('name')
+    localStorage.removeItem('avatar')
   }
 
   clearStore () {
@@ -36,6 +48,8 @@ class User {
     this.token = token
     this.name = name
     this.email = email
+    localStorage.setItem('token', `Bearer ${token}`)
+    localStorage.setItem('name', name)
   }
 
   registerUser ({ email, password, name, mobile }) {
@@ -50,10 +64,11 @@ class User {
       .catch(error => this.setError(error))
   }
 
-  Authenticate ({ email, password }) {
+  authenticate ({ email, password }) {
     auth(email, password).then(response => {
       console.log(response)
       if (response.data.result === 'success') {
+        console.log(response.data)
         this.setLoggedIn()
         this.setUser(response.data)
       } else {
@@ -62,19 +77,33 @@ class User {
     })
       .catch(error => this.setError(error))
   }
+
+  authenticateWithAccount ({ avatar, name, email, accessToken, userID }) {
+    this.avatar = avatar
+    this.name = name
+    this.email = email
+    this.isLoggedIn = true
+    this.token = accessToken
+    localStorage.setItem('token', `Bearer ${accessToken}`)
+    localStorage.setItem('name', name)
+    localStorage.setItem('avatar', avatar)
+  }
 }
 
 decorate(User, {
   setIsRegistered: action,
+  authenticateWithAccount: action,
   setLoggedIn: action,
   setUser: action,
   setError: action,
+  logout: action,
   clearStore: action,
   isLoggedIn: observable,
   isRegistered: observable,
   token: observable,
   name: observable,
   email: observable,
+  avatar: observable,
   error: observable
 })
 

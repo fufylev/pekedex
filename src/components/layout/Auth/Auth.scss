@@ -18,3 +18,15 @@
   padding: 0 5px!important;
   margin-bottom: 1rem;
 }
+
+.reg-button {
+  min-width: 270px!important;
+  min-height: 50px;
+  &-facebook {
+
+  }
+  &-google {
+    background-color: #fff!important;
+    color: #282828!important;
+  }
+}

@@ -1,6 +1,9 @@
 import axios from 'axios'
 
 export const API_URL = 'https://pokeapi.co/api/v2/'
+// eslint-disable-next-line no-unused-vars
+export const facebookID = '210062593585689'
+export const google = '245233248634-fvk04phkvc0thk32iiugofspmvfardkj.apps.googleusercontent.com'
 
 /**
  *
@@ -79,3 +82,18 @@ export async function fetchPokemon (url) {
     }
   })
 }
+
+// export function fetchAccessToken (token) {
+//   return new Promise((resolve, reject) => {
+//     try {
+//       axios.get('https://graph.facebook.com/v6.0/me?fields=id,name,email,picture',
+//             { headers: { Authorization: `Bearer ${token}` } })
+//             .then(response => {
+//               console.log(response.data)
+//               setData(response.data)
+//             })
+//     } catch (e) {
+//       reject(e)
+//     }
+//   })
+// }
