@@ -1,21 +1,42 @@
 import React from 'react'
-import FacebookLogin from 'react-facebook-login'
+import FacebookIcon from '@material-ui/icons/Facebook'
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
 import { facebookID } from '../../../utils/API'
+import PropTypes from 'prop-types'
+import { inject, observer } from 'mobx-react'
+import Button from '@material-ui/core/Button'
 
-export function FaceBook () {
+function FaceBook (props) {
   const responseFacebook = (response) => {
-    console.log(response)
-  }
-
-  const componentClicked = () => {
+    const { picture, name, email, accessToken, userID } = response
+    const avatar = picture.data.url
+    // console.log(response)
+    props.User.authenticateWithAccount({ avatar, name, email, accessToken, userID })
   }
 
   return (
-    <FacebookLogin
-      appId={ facebookID }
-      autoLoad={true}
-      fields="name,email,picture"
-      onClick={componentClicked}
-      callback={responseFacebook} />
+    <div>
+      <FacebookLogin
+        appId={ facebookID }
+        fields="name,email,picture"
+        callback={responseFacebook}
+        render={renderProps => (
+          <Button
+            variant="contained"
+            color="primary"
+            className='mb2r reg-button reg-button-facebook'
+            onClick={renderProps.onClick}
+          >
+            <FacebookIcon fontSize='large'/>&ensp; Login with Facebook
+          </Button>
+        )}
+      />
+    </div>
   )
 }
+
+FaceBook.propTypes = {
+  User: PropTypes.object
+}
+
+export default inject('User')(observer(FaceBook))

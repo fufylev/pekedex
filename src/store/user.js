@@ -8,9 +8,10 @@ class User {
     this.isLoggedIn = localStorage.getItem('token')
     this.isRegistered = false
     this.error = ''
-    this.token = ''
+    this.token = localStorage.getItem('token')
     this.name = localStorage.getItem('name')
     this.email = ''
+    this.avatar = localStorage.getItem('avatar')
   }
 
   setLoggedIn () {
@@ -26,8 +27,10 @@ class User {
     this.token = ''
     this.name = ''
     this.email = ''
-    window.localStorage.removeItem('token')
+    this.avatar = ''
+    localStorage.removeItem('token')
     localStorage.removeItem('name')
+    localStorage.removeItem('avatar')
   }
 
   clearStore () {
@@ -45,8 +48,8 @@ class User {
     this.token = token
     this.name = name
     this.email = email
-    localStorage.setItem('token', `Bearer ${this.token}`)
-    localStorage.setItem('name', this.name)
+    localStorage.setItem('token', `Bearer ${token}`)
+    localStorage.setItem('name', name)
   }
 
   registerUser ({ email, password, name, mobile }) {
@@ -61,10 +64,11 @@ class User {
       .catch(error => this.setError(error))
   }
 
-  Authenticate ({ email, password }) {
+  authenticate ({ email, password }) {
     auth(email, password).then(response => {
       console.log(response)
       if (response.data.result === 'success') {
+        console.log(response.data)
         this.setLoggedIn()
         this.setUser(response.data)
       } else {
@@ -73,10 +77,22 @@ class User {
     })
       .catch(error => this.setError(error))
   }
+
+  authenticateWithAccount ({ avatar, name, email, accessToken, userID }) {
+    this.avatar = avatar
+    this.name = name
+    this.email = email
+    this.isLoggedIn = true
+    this.token = accessToken
+    localStorage.setItem('token', `Bearer ${accessToken}`)
+    localStorage.setItem('name', name)
+    localStorage.setItem('avatar', avatar)
+  }
 }
 
 decorate(User, {
   setIsRegistered: action,
+  authenticateWithAccount: action,
   setLoggedIn: action,
   setUser: action,
   setError: action,
@@ -87,6 +103,7 @@ decorate(User, {
   token: observable,
   name: observable,
   email: observable,
+  avatar: observable,
   error: observable
 })
 

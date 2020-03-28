@@ -8,7 +8,8 @@ import { Link, useHistory } from 'react-router-dom'
 import CustomInput from './CustomInput'
 import PasswordInput from './PasswordInput'
 import Alert from '@material-ui/lab/Alert'
-import { FaceBook } from './FaceBook'
+import FaceBook from './FaceBook'
+import Google from './Google'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,7 +43,7 @@ function Auth (props) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    props.User.Authenticate({ email: values.email, password: values.password })
+    props.User.authenticate({ email: values.email, password: values.password })
     history.push('/')
   }
 
@@ -84,6 +85,9 @@ function Auth (props) {
           </div>
           <div className='flex-jcc'>
             <FaceBook/>
+          </div>
+          <div className='flex-jcc'>
+            <Google/>
           </div>
         </form>
       </div>

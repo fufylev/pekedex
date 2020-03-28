@@ -10,20 +10,20 @@ header {
   background-color:#282828;
   background-size:16px 16px;
   @media screen and (max-width: $smWidth) {
-    min-height: 50px;
+    min-height: 60px;
   }
   @media screen and (max-width: $xsWidth) {
-    min-height: 50px;
+    min-height: 60px;
   }
 }
 
 .header {
-  padding: 0.7rem 0 0 0;
+  padding: 0.7rem 1rem 0 1rem;
   @media screen and (max-width: $smWidth) {
-    padding: 0.7rem 1rem 0 1rem;
+    //padding: 0.7rem 1rem 0 1rem;
   }
   @media screen and (max-width: $xsWidth) {
-    padding: 0.7rem 1rem 0 1rem;
+    //padding: 0.7rem 1rem 0 1rem;
   }
   &-text {
     margin: 0 auto;
@@ -43,35 +43,13 @@ header {
     color: white;
   }
   &__menu {
-    position: relative!important;
-    z-index: 100;
-  }
-  &__popup {
-    position: absolute!important;
-    width: 200px;
-    background-color: #f0f0f0;
-    border-radius: 10px;
-    box-shadow: rgba(41, 18, 25, 0.1) 0px 0px 6px 0px, rgba(44, 19, 27, 0.1) 0px 2px 12px 0px;
-    z-index: 101;
-    top: 58px!important;
-    right: 10px!important;
-    min-height: 100px;
-  }
-  &__list {
-    font-weight: bold;
-    &__item {
-      margin-bottom: 1rem;
-    }
-    a {
-      color: #282828;
-      font-weight: bold;
-    }
-    li {
-      list-style: none;
-      text-align: start;
-    }
+
   }
   &__link {
     cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    color: white;
+    margin-left: 2rem;
   }
 }

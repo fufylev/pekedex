@@ -73,6 +73,16 @@ a {
   padding: 0;
   width: 100%;
 }
+
+.sm-xs-hidden {
+  @media screen and (max-width: $smWidth) {
+    display: none;
+  }
+  @media screen and (max-width: $xsWidth) {
+    display: none;
+  }
+}
+
 html {
   font-size: $xlMainFontSize;
   box-sizing: border-box;
