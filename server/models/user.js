@@ -7,9 +7,13 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   mobile: { type: String },
-  email: { type: String },
+  email: {
+    type: String,
+    lowercase: true
+  },
   name: { type: String },
   password: { type: String },
+  bookMarkedPokemons: { type: Array } // [ { id: pokemonID, ifLiked: false } ]
 })
 
 userSchema.pre('save', async function (next) {

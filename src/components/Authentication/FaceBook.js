@@ -1,7 +1,7 @@
 import React from 'react'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
-import { facebookID } from '../../../utils/API'
+import { facebookID } from '../../utils/API'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import Button from '@material-ui/core/Button'

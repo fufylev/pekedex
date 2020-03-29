@@ -32,6 +32,7 @@ const verifyToken = (req, res, next) => {
 }
 
 const User = require('./models/user')
+// const Pokemon = require('./models/pokemons')
 
 app.post('/register', async (req, res) => {
   const checkMail = await User.findOne({
@@ -75,21 +76,73 @@ app.post('/auth', async (req, res) => {
     result: 'success',
     token,
     email: user.email,
-    name: user.name
+    name: user.name,
+    id: user._id
   })
 })
 
-app.all('/api*', verifyToken)
+// app.all('/api*', verifyToken)
 
-app.get('/users/:id', async (req, res) => {
+app.get('/user/:id', async (req, res) => {
   let user = await User.findById(req.params.id)
   user = user.toObject()
 
-  // удаляем пароль
   delete user.password
 
   res.json(user)
 })
+
+app.post('/api/pokemons/bookmarked/:id', async (req, res) => {
+  console.log('WE ARE HERE')
+  let user = await User.findById(req.params.id)
+  console.log('USET - ')
+  console.log(user)
+  user = user.toObject()
+  if (user) {
+    const ifLiked = user.bookMarkedPokemons.some(bookMarkedPokemon =>
+      bookMarkedPokemon.id === req.body.pokemonID
+    )
+    console.log('ifLiked - ')
+    console.log(ifLiked)
+    if (ifLiked) {
+      user.bookMarkedPokemons = user.bookMarkedPokemons.map(bookMarkedPokemon => {
+        if (bookMarkedPokemon.id === req.body.pokemonID) {
+          bookMarkedPokemon.ifLiked = !bookMarkedPokemon.ifLiked
+        }
+        return bookMarkedPokemon
+      })
+    } else {
+      user.bookMarkedPokemons = [
+        ...user.bookMarkedPokemons,
+        {
+          id: req.body.pokemonID,
+          ifLiked: false
+        }
+      ]
+    }
+    await user.save()
+    return res.json({
+      result: 'success'
+    })
+  }
+  res.json(user)
+})
+
+/* app.post('/register', async (req, res) => {
+  const checkMail = await User.findOne({
+    email: req.body.email
+  })
+  if (!checkMail) {
+    const user = new User(req.body)
+    await user.save()
+    return res.json({
+      result: 'success'
+    })
+  }
+  res.json({
+    result: 'This user already exists'
+  })
+}) */
 
 app.listen(8888, () => {
   console.log('Server on port 8888 has been started!')

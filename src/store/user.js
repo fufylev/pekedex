@@ -11,6 +11,7 @@ class User {
     this.token = localStorage.getItem('token')
     this.name = localStorage.getItem('name')
     this.email = ''
+    this.userID = localStorage.getItem('userID')
     this.avatar = localStorage.getItem('avatar')
   }
 
@@ -28,9 +29,11 @@ class User {
     this.name = ''
     this.email = ''
     this.avatar = ''
+    this.userID = null
     localStorage.removeItem('token')
     localStorage.removeItem('name')
     localStorage.removeItem('avatar')
+    localStorage.removeItem('userID')
   }
 
   clearStore () {
@@ -44,12 +47,14 @@ class User {
     console.log(error)
   }
 
-  setUser ({ token, name, email }) {
+  setUser ({ token, name, email, id }) {
     this.token = token
     this.name = name
     this.email = email
+    this.userID = id
     localStorage.setItem('token', `Bearer ${token}`)
     localStorage.setItem('name', name)
+    localStorage.setItem('userID', id)
   }
 
   registerUser ({ email, password, name, mobile }) {
@@ -104,7 +109,8 @@ decorate(User, {
   name: observable,
   email: observable,
   avatar: observable,
-  error: observable
+  error: observable,
+  userID: observable
 })
 
 export default new User()

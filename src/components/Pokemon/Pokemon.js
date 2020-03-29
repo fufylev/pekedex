@@ -5,16 +5,25 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ProgressBar from '../ProgressBar/ProgressBar'
 import { COLORS } from '../../utils/COLORS'
+// import FavoriteIcon from '@material-ui/icons/Favorite'
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder'
+import { inject, observer } from 'mobx-react'
 
 function Pokemon (props) {
   const { pokemon } = props
+  const { userID } = props.User
+
+  const toggleBookmark = () => {
+    props.Store.togglePokemonBookmark({ pokemonID: pokemon.id, userID })
+  }
 
   return (
-    <Link to={`/pokemons/${pokemon.id}-${pokemon.name}`} className='smallcard__link'>
-      <div className='smallcard flex-v'>
-        <div className='smallcard__header flex-jcc'>
-          <h3>#{pokemon.id} &emsp; {pokemon.name.toUpperCase()}</h3>
-        </div>
+    <div className='smallcard smallcard__link flex-v'>
+      <div className='smallcard__header flex-jcc'>
+        <h3>#{pokemon.id} &emsp; {pokemon.name.toUpperCase()}</h3> &emsp;
+        <FavoriteBorderIcon className='smallcard__like' onClick={toggleBookmark}/>
+      </div>
+      <Link to={`/pokemons/${pokemon.id}-${pokemon.name}`} className=''>
         <div className='smallcard__content flex-v'>
           <img src={pokemon.sprites.front_default} alt={pokemon.name} className='smallcard__avatar'/>
           <div className='smallcard__pokemon flex-jcc'>
@@ -35,13 +44,15 @@ function Pokemon (props) {
             ))}
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   )
 }
 
 Pokemon.propTypes = {
-  pokemon: PropTypes.object
+  pokemon: PropTypes.object,
+  User: PropTypes.object,
+  Store: PropTypes.object
 }
 
-export default Pokemon
+export default inject('User', 'Store')(observer(Pokemon))

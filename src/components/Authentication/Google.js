@@ -1,8 +1,8 @@
 import React from 'react'
 import { GoogleLogin } from 'react-google-login'
-import { google } from '../../../utils/API'
+import { google } from '../../utils/API'
 import Button from '@material-ui/core/Button'
-import googleIcon from '../../../assets/img/search.svg'
+import googleIcon from '../../assets/img/search.svg'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 
