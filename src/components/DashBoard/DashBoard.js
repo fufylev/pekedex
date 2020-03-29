@@ -2,18 +2,18 @@ import './DashBoard.scss'
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
-import PaginationControlled from '../../Pagination/PaginationControlled'
+import PaginationControlled from '../Pagination/PaginationControlled'
 import { inject, observer } from 'mobx-react'
-import ItemsPerPageBlock from '../../Pagination/ItemsPerPageBlock'
-import Pokemon from '../../Pokemon/Pokemon'
-import CircularProgress from '../../Loader/Loader'
-import CheckBox from '../../Filter/CheckBox'
-import Modal from '../../Modal/Modal'
-import PokemonDetails from '../../Pokemon/PokemonDetails'
-import Search from '../../Filter/Serach'
+import ItemsPerPageBlock from '../Pagination/ItemsPerPageBlock'
+import Pokemon from '../Pokemon/Pokemon'
+import CircularProgress from '../Loader/Loader'
+import CheckBox from '../Filter/CheckBox'
+import Modal from '../Modal/Modal'
+import PokemonDetails from '../Pokemon/PokemonDetails'
+import Search from '../Filter/Serach'
 
 function DashBoard (props) {
-  const { pokemonsFiltered } = props.Store
+  const { pokemonsFiltered, pokemons } = props.Store
 
   useEffect(() => {
     props.Store.fetchData()
@@ -32,10 +32,11 @@ function DashBoard (props) {
         </div>
       </div>
       <main>
-
         <div className='container'>
           {pokemonsFiltered.length === 0
-            ? <CircularProgress/> : (
+            ? (pokemons.length === 0 && pokemonsFiltered.length === 0)
+              ? <CircularProgress/>
+              : <div>No matches according to your search</div> : (
               <div className='cards-container'>
                 {pokemonsFiltered.map(pokemon =>
                   <Pokemon pokemon={pokemon} key={pokemon.name}/>
@@ -44,7 +45,7 @@ function DashBoard (props) {
             )}
         </div>
       </main>
-      {/* From here activate a Modal Router */}
+
       <Switch>
         <Route path="/pokemons/:id"><Modal><PokemonDetails/></Modal></Route>
       </Switch>

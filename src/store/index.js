@@ -1,6 +1,6 @@
 import { action, computed, configure, decorate, observable } from 'mobx'
 import { pokemonTypes } from '../utils/helpers'
-import { fetchPokemon, getAllPokemons } from '../utils/API'
+import { fetchPokemon, getAllPokemons, togglePokemon } from '../utils/API'
 
 configure({ enforceActions: 'observed' })
 
@@ -37,6 +37,11 @@ class Store {
 
   tickPokemonTypes (type) {
     this.pokemonTypes = { ...this.pokemonTypes, ...type }
+  }
+
+  togglePokemonBookmark ({ pokemonID, userID }) {
+    console.log(pokemonID, userID)
+    togglePokemon(pokemonID, userID)
   }
 
   /**

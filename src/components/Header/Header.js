@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.scss'
 import { Link } from 'react-router-dom'
-import icon from '../../../assets/img/icon.png'
+import icon from '../../assets/img/icon.png'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 

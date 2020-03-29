@@ -1,5 +1,5 @@
 import React from 'react'
-import Auth from '../layout/Auth/Auth'
+import Auth from '../Authentication/Auth'
 import PropTypes from 'prop-types'
 import { inject, observer } from 'mobx-react'
 import { withRouter } from 'react-router-dom'
@@ -48,7 +48,7 @@ function HOC (ComposedComponent) {
     //
     // return (
     //   <div>
-    //     { isLoggedIn ? <ComposedComponent {...props} /> : <Auth/> }
+    //     { isLoggedIn ? <ComposedComponent {...props} /> : <Authentication/> }
     //   </div>
     // )
   }
