@@ -10,6 +10,7 @@ const UsersController = require('../controllers/users')
 const passportSignIn = passport.authenticate('local', { session: false })
 const passportJWT = passport.authenticate('jwt', { session: false })
 const passportGoogle = passport.authenticate('googleToken', { session: false })
+const passportFacebook = passport.authenticate('facebookToken', { session: false })
 
 router.route('/signup')
   .post(validateBody(schemas.authSchema), UsersController.signUp)
@@ -22,5 +23,8 @@ router.route('/secret')
 
 router.route('/oauth/google')
   .post(passportGoogle, UsersController.googleOAuth)
+
+router.route('/oauth/facebook')
+  .post(passportFacebook, UsersController.facebookOAuth)
 
 module.exports = router
