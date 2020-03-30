@@ -19,8 +19,10 @@ class User {
     this.isLoggedIn = true
   }
 
-  setIsRegistered () {
+  setIsRegistered ({ token }) {
     this.isRegistered = true
+    this.token = token
+    localStorage.setItem('token', token)
   }
 
   logout () {
@@ -58,10 +60,11 @@ class User {
   }
 
   registerUser ({ email, password, name, mobile }) {
+    console.log('Register was called')
     register(email, password, name, mobile).then(response => {
       console.log(response)
       if (response.data.result === 'success') {
-        this.setIsRegistered()
+        this.setIsRegistered(response.data)
       } else {
         this.setError(response.data.result)
       }
@@ -70,7 +73,8 @@ class User {
   }
 
   authenticate ({ email, password }) {
-    auth(email, password).then(response => {
+    console.log('Auth was called')
+    auth({ email, password, token: this.token }).then(response => {
       console.log(response)
       if (response.data.result === 'success') {
         console.log(response.data)
