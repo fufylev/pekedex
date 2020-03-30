@@ -6,7 +6,8 @@ const GooglePlusTokenStrategy = require('passport-google-plus-token')
 const { JWT_SECRET } = require('./configuration')
 const User = require('./models/user')
 // const config = require('./configuration')
-
+// 7943cb1cfeefa2776a750f7f6479eb19
+// 210062593585689
 // JSON WEB TOKENS STRATEGY
 passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
@@ -65,7 +66,7 @@ passport.use(new LocalStrategy({
 }, async (email, password, done) => {
   try {
     // Find the user given the email
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ "local.email": email })
 
     // If not, handle it
     if (!user) {
