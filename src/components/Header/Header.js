@@ -21,7 +21,7 @@ function Header (props) {
           </div>
         </Link>
         <div style={{ color: 'white' }}>
-          {isLoggedIn && <strong className='sm-xs-hidden'>Hello {name}</strong>}
+          {isLoggedIn && name !== undefined && <strong className='sm-xs-hidden'>Hello {name}</strong>}
         </div>
         <div className='header__menu flex-jcc'>
           {avatar && <img src={avatar} alt="avatar" style={{

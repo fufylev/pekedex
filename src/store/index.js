@@ -1,6 +1,6 @@
 import { action, computed, configure, decorate, observable } from 'mobx'
 import { pokemonTypes } from '../utils/helpers'
-import { fetchPokemon, getAllPokemons, togglePokemon } from '../utils/API'
+import { fetchPokemon, getAllPokemons } from '../utils/API'
 
 configure({ enforceActions: 'observed' })
 
@@ -39,10 +39,10 @@ class Store {
     this.pokemonTypes = { ...this.pokemonTypes, ...type }
   }
 
-  togglePokemonBookmark ({ pokemonID, userID }) {
-    console.log(pokemonID, userID)
-    togglePokemon(pokemonID, userID)
-  }
+  // togglePokemonBookmark ({ pokemonID, userID }) {
+  //   //   console.log(pokemonID, userID)
+  //   //   togglePokemon(pokemonID, userID)
+  //   // }
 
   /**
    * Returns pokemons array filtered by search line or by checked types

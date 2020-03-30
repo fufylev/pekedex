@@ -1,30 +1,50 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-
-const CRYPT_STEPS = 12
-
+const bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema
 
+// Create a schema
 const userSchema = new Schema({
-  mobile: { type: String },
   email: {
     type: String,
+    required: true,
+    unique: true,
     lowercase: true
   },
-  name: { type: String },
-  password: { type: String },
-  bookMarkedPokemons: { type: Array } // [ { id: pokemonID, ifLiked: false } ]
+  password: {
+    type: String,
+    required: true
+  },
+  name: {
+    type: String
+  },
+  mobile: {
+    type: String
+  }
 })
 
 userSchema.pre('save', async function (next) {
-  if (this.isModified('password')) {
-    this.password = await bcrypt.hash(this.password, CRYPT_STEPS)
+  try {
+    // Generate a salt
+    const salt = await bcrypt.genSalt(10)
+    // Generate a password hash (salt + hash)
+    // Re-assign hashed version over original, plain text password
+    this.password = await bcrypt.hash(this.password, salt)
+    next()
+  } catch (error) {
+    next(error)
   }
-  next()
 })
 
-userSchema.methods.comparePassword = async function (candidate) {
-  return await bcrypt.compare(candidate, this.password)
+userSchema.methods.isValidPassword = async function (newPassword) {
+  try {
+    return await bcrypt.compare(newPassword, this.password)
+  } catch (error) {
+    throw new Error(error)
+  }
 }
 
-module.exports = mongoose.model('User', userSchema, 'users')
+// Create a model
+const User = mongoose.model('user', userSchema)
+
+// Export the model
+module.exports = User

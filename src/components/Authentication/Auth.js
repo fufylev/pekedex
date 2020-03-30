@@ -8,8 +8,8 @@ import { Link, useHistory } from 'react-router-dom'
 import CustomInput from './CustomInput'
 import PasswordInput from './PasswordInput'
 import Alert from '@material-ui/lab/Alert'
-import FaceBook from './FaceBook'
-import Google from './Google'
+// import FaceBook from './FaceBook'
+// import Google from './Google'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -83,12 +83,12 @@ function Auth (props) {
           <div className='flex-jcc mb2r'>
             <span>Do not have an account?</span>&ensp;<Link to='/register'><strong>Sign Up</strong></Link>
           </div>
-          <div className='flex-jcc'>
+          {/* <div className='flex-jcc'>
             <FaceBook/>
           </div>
           <div className='flex-jcc'>
             <Google/>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>
