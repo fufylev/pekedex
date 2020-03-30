@@ -19,4 +19,7 @@ router.route('/signin')
 router.route('/secret')
   .get(passportJWT, UsersController.secret)
 
+router.route('/oauth/google')
+  .post(passport.authenticate('googleToken', { session: false }))
+
 module.exports = router
