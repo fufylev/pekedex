@@ -4,7 +4,7 @@ import axios from 'axios'
 export const API_URL = 'https://pokeapi.co/api/v2/'
 
 // Local Server API url
-export const SERVER_API = 'http://localhost:5000/users/'
+export const SERVER_API = 'http://localhost:5000/users'
 
 // ids for Facebook and Google - for both I registered the App
 export const facebookID = '210062593585689'

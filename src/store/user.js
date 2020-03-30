@@ -20,6 +20,7 @@ class User {
   }
 
   setIsRegistered ({ token }) {
+    console.log('hit the isRegistered')
     this.isRegistered = true
     this.token = token
     localStorage.setItem('token', token)
@@ -54,15 +55,14 @@ class User {
     this.name = name
     this.email = email
     this.userID = id
-    localStorage.setItem('token', `Bearer ${token}`)
+    localStorage.setItem('token', token)
     localStorage.setItem('name', name)
     localStorage.setItem('userID', id)
   }
 
   registerUser ({ email, password, name, mobile }) {
-    console.log('Register was called')
     register(email, password, name, mobile).then(response => {
-      console.log(response)
+      console.log('response', response)
       if (response.data.result === 'success') {
         this.setIsRegistered(response.data)
       } else {
@@ -73,7 +73,6 @@ class User {
   }
 
   authenticate ({ email, password }) {
-    console.log('Auth was called')
     auth({ email, password, token: this.token }).then(response => {
       console.log(response)
       if (response.data.result === 'success') {
@@ -81,7 +80,7 @@ class User {
         this.setLoggedIn()
         this.setUser(response.data)
       } else {
-        this.setError(response.data.result)
+        this.setError(response.data.error)
       }
     })
       .catch(error => this.setError(error))
@@ -93,7 +92,7 @@ class User {
     this.email = email
     this.isLoggedIn = true
     this.token = accessToken
-    localStorage.setItem('token', `Bearer ${accessToken}`)
+    localStorage.setItem('token', accessToken)
     localStorage.setItem('name', name)
     localStorage.setItem('avatar', avatar)
   }
