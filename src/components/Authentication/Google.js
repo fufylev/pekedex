@@ -8,10 +8,17 @@ import { inject, observer } from 'mobx-react'
 
 function Google (props) {
   const responseGoogle = (response) => {
-    // console.log(response)
-    const { accessToken } = response
-    const { imageUrl, name, email, googleId } = response.profileObj
-    props.User.authenticateWithAccount({ avatar: imageUrl, name, email, accessToken, userID: googleId })
+    console.log(response)
+    // eslint-disable-next-line camelcase
+    const { access_token } = response.tokenObj
+    const { imageUrl, givenName, email, googleId } = response.profileObj
+    props.User.authenticateWithGoogle({
+      avatar: imageUrl,
+      name: givenName,
+      email,
+      accessToken: access_token,
+      userID: googleId
+    })
   }
 
   return (

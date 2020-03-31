@@ -1,5 +1,6 @@
 import { action, configure, decorate, observable } from 'mobx'
-import { auth, register } from '../utils/API'
+import { SERVER_API } from '../utils/API'
+import axios from 'axios'
 
 configure({ enforceActions: 'observed' })
 
@@ -20,7 +21,6 @@ class User {
   }
 
   setIsRegistered ({ token }) {
-    console.log('hit the isRegistered')
     this.isRegistered = true
     this.token = token
     localStorage.setItem('token', token)
@@ -47,60 +47,84 @@ class User {
 
   setError (error) {
     this.error = error
-    console.log(error)
   }
 
-  setUser ({ token, name, email, id }) {
+  setUser ({ avatar, token, name, email, id }) {
     this.token = token
     this.name = name
     this.email = email
     this.userID = id
+    this.avatar = avatar
     localStorage.setItem('token', token)
     localStorage.setItem('name', name)
     localStorage.setItem('userID', id)
+    localStorage.setItem('avatar', avatar)
   }
 
   registerUser ({ email, password, name, mobile }) {
-    register(email, password, name, mobile).then(response => {
-      console.log('response', response)
-      if (response.data.result === 'success') {
-        this.setIsRegistered(response.data)
-      } else {
-        this.setError(response.data.result)
-      }
+    axios.post(`${SERVER_API}/signup`, {
+      email, password
     })
-      .catch(error => this.setError(error))
+      .then(response => {
+        // console.log(response.data)
+        if (response.status === 200) {
+          this.setIsRegistered(response.data)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        this.setError('Email is already in use')
+      })
   }
 
   authenticate ({ email, password }) {
-    auth({ email, password, token: this.token }).then(response => {
-      console.log(response)
-      if (response.data.result === 'success') {
-        console.log(response.data)
-        this.setLoggedIn()
-        this.setUser(response.data)
-      } else {
-        this.setError(response.data.error)
-      }
+    axios.post(`${SERVER_API}/signin`, {
+      email, password
+    }, {
+      headers: { Authorization: this.token }
     })
-      .catch(error => this.setError(error))
+      .then(response => {
+        // console.log(response.data)
+        if (response.status === 200) {
+          this.setLoggedIn()
+          this.setUser(response.data)
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        this.setError('Email or password are incorrect')
+      })
   }
 
-  authenticateWithAccount ({ avatar, name, email, accessToken, userID }) {
-    this.avatar = avatar
-    this.name = name
-    this.email = email
-    this.isLoggedIn = true
-    this.token = accessToken
-    localStorage.setItem('token', accessToken)
-    localStorage.setItem('name', name)
-    localStorage.setItem('avatar', avatar)
+  authenticateWithFacebook ({ avatar, name, email, accessToken, userID }) {
+    axios.post('http://localhost:5000/users/oauth/facebook', {
+      access_token: accessToken
+    })
+      .then(res => {
+        // console.log(res.data)
+        this.setLoggedIn()
+        this.setUser({ avatar, token: res.data.token, name, email, id: userID })
+      })
+      .catch(e => console.log(e))
+  }
+
+  authenticateWithGoogle ({ avatar, name, email, accessToken, userID }) {
+    axios.post('http://localhost:5000/users/oauth/google', {
+      access_token: accessToken
+    })
+      .then(res => {
+        console.log(res.data)
+        this.setLoggedIn()
+        this.setUser({ avatar, token: res.data.token, name, email, id: userID })
+      })
+      .catch(e => console.log(e))
   }
 }
 
 decorate(User, {
   setIsRegistered: action,
-  authenticateWithAccount: action,
+  authenticateWithFacebook: action,
+  authenticateWithGoogle: action,
   setLoggedIn: action,
   setUser: action,
   setError: action,

@@ -10,36 +10,6 @@ export const SERVER_API = 'http://localhost:5000/users'
 export const facebookID = '210062593585689'
 export const google = '245233248634-fvk04phkvc0thk32iiugofspmvfardkj.apps.googleusercontent.com'
 
-export function register (email, password, name, mobile) {
-  return new Promise((resolve, reject) => {
-    axios.post(`${SERVER_API}/signup`, {
-      email, password
-    })
-      .then(response => {
-        resolve(response)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-}
-
-export function auth ({ email, password, token }) {
-  return new Promise((resolve, reject) => {
-    axios.post(`${SERVER_API}/signin`, {
-      email, password
-    }, {
-      headers: { Authorization: token }
-    })
-      .then(response => {
-        resolve(response)
-      })
-      .catch(error => {
-        reject(error)
-      })
-  })
-}
-
 export async function getAllPokemons (page, itemsToShow) {
   const url = `${API_URL}pokemon/?offset=${page === 1 ? 0 : (page - 1) * itemsToShow}&limit=${itemsToShow}`
   return new Promise((resolve, reject) => {

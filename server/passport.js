@@ -32,7 +32,8 @@ passport.use(new JwtStrategy({
 // Google OAuth Strategy
 passport.use('googleToken', new GooglePlusTokenStrategy({
   clientID: config.oauth.google.clientID,
-  clientSecret: config.oauth.google.clientSecret
+  clientSecret: config.oauth.google.clientSecret,
+  passReqToCallback: true
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     // Should have full user profile over here

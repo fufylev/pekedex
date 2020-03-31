@@ -8,10 +8,15 @@ import Button from '@material-ui/core/Button'
 
 function FaceBook (props) {
   const responseFacebook = (response) => {
-    const { picture, name, email, accessToken, userID } = response
-    const avatar = picture.data.url
-    // console.log(response)
-    props.User.authenticateWithAccount({ avatar, name, email, accessToken, userID })
+    const { name, email, accessToken, userID } = response
+    // console.log('response', response)
+    props.User.authenticateWithFacebook({
+      avatar: response.picture.data.url,
+      name,
+      email,
+      accessToken,
+      userID
+    })
   }
 
   return (

@@ -11,7 +11,7 @@ import { inject, observer } from 'mobx-react'
 
 function Pokemon (props) {
   const { pokemon } = props
-  const { userID } = props.User
+  const { userID, isLoggedIn } = props.User
 
   const toggleBookmark = () => {
     props.Store.togglePokemonBookmark({ pokemonID: pokemon.id, userID })
@@ -21,7 +21,7 @@ function Pokemon (props) {
     <div className='smallcard smallcard__link flex-v'>
       <div className='smallcard__header flex-jcc'>
         <h3>#{pokemon.id} &emsp; {pokemon.name.toUpperCase()}</h3> &emsp;
-        <FavoriteBorderIcon className='smallcard__like' onClick={toggleBookmark}/>
+        {isLoggedIn && <FavoriteBorderIcon className='smallcard__like' onClick={toggleBookmark}/>}
       </div>
       <Link to={`/pokemons/${pokemon.id}-${pokemon.name}`} className=''>
         <div className='smallcard__content flex-v'>
