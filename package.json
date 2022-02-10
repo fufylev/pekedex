@@ -50,7 +50,7 @@
     "mobx-react-lite": "^1.5.2",
     "mongoose": "^5.9.6",
     "morgan": "^1.10.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "nodemon": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "5.0.3",
     "passport": "^0.4.1",
